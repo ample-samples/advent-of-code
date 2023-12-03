@@ -1,11 +1,6 @@
 import fs from 'fs'
 
 // GameSets contain CubeSets
-
-type CubeCount = { red: number } |
-{ green: number } |
-{ blue: number }
-
 type CubeSet = {
 	red: number,
 	green: number,
@@ -25,12 +20,6 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, da
 			.split(';')
 			.map(element => element.split(','))
 	});
-
-	const answerTry = null;
-
-	for (let i = 0; i < gameSets.length; i++) {
-		console.log(`gameSet [${i}]`, gameSets[i]);
-	}
 
 	function mapGameSetElelemtToCubeSetObject(cubeSetArr: string[]): CubeSet {
 
@@ -85,5 +74,3 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, da
 
 	console.log(`Your answer is ${gameSum}`)
 })
-
-
