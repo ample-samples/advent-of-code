@@ -1,10 +1,8 @@
 import fs from 'fs'
 
-const inputs: { [key: string]: string | undefined } = {};
+type WordToNumber = { [key: string]: string }
 
-type WordToNumber = {
-	[key: string]: string
-}
+const inputs: { [key: string]: string | undefined } = {};
 
 const wordToNumber: WordToNumber = {
 	one: '1',
