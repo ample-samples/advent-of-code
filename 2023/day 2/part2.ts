@@ -7,18 +7,18 @@ type CubeSet = {
 	blue: number,
 }
 
-fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/testInput.txt', (err, data) => {
+fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, data) => {
 	if (err) throw err;
 	const inputs = data
 		.toString()
-		.split('\n')
-	inputs.pop()
+		.split('\n');
+	inputs.pop();
 
 	const gameSets = inputs.map(element => {
 		return element
 			.slice(element.indexOf(':') + 2)
 			.split(';')
-			.map(element => element.split(','))
+			.map(element => element.split(','));
 	});
 
 	function mapGameSetElelemtToCubeSetObject(cubeSetArr: string[]): CubeSet {
@@ -37,38 +37,53 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/testInput.txt', (err
 			}
 
 			if (propsToUpdate[1] === 'red') {
-				cubeSet.red = Number(propsToUpdate[0])
+				cubeSet.red = Number(propsToUpdate[0]);
 
 			} else if (propsToUpdate[1] === 'green') {
-				cubeSet.green = Number(propsToUpdate[0])
+				cubeSet.green = Number(propsToUpdate[0]);
 
 			} else if (propsToUpdate[1] === 'blue') {
-				cubeSet.blue = Number(propsToUpdate[0])
+				cubeSet.blue = Number(propsToUpdate[0]);
 			}
 
 		}
-		return cubeSet
+		return cubeSet;
 	}
 
-	const cubeSetsAreValid = gameSets.map(gameSet => {
-		console.log("new gameSet", gameSet)
-		const cubeSetIsValid = gameSet.flatMap(cubeSetStrArr => {
-			const cubeSet = mapGameSetElelemtToCubeSetObject(cubeSetStrArr)
-			console.log(cubeSet)
-			if (cubeSet.red <= 12 && cubeSet.green <= 13 && cubeSet.blue <= 14) {
-				return true;
-			} else {
-				return false;
-			}
-		}).reduce((prevEl, currentEl) => prevEl && currentEl)
-
-		return cubeSetIsValid
+	const cubeSets = gameSets.map(gameSet => {
+		const cubeSets = gameSet.flatMap(cubeSetStrArr => {
+			const cubeSet = mapGameSetElelemtToCubeSetObject(cubeSetStrArr);
+			return cubeSet;
+		})
+		return cubeSets;
 	})
 
-	let gameSum = 0;
-	for (const [cubeSetIndex, cubeSetIsValid] of cubeSetsAreValid.entries()) {
-		if (cubeSetIsValid) gameSum += cubeSetIndex + 1;
-	}
+	let cubeSetPowerSum = 0;
+	for (const [cubeSetIndex, cubeSet] of cubeSets.entries()) {
+		// console.log(cubeSetIndex, cubeSet)
+		const minimumCubeSet: CubeSet = {
+			red: 0,
+			green: 0,
+			blue: 0,
+		}
 
+		for (let i = 0; i < cubeSet.length; i++) {
+			const element = cubeSet[i];
+			if (element.red > minimumCubeSet.red) {
+				minimumCubeSet.red = element.red
+			}
+			if (element.green > minimumCubeSet.green) {
+				minimumCubeSet.green = element.green
+			}
+			if (element.blue > minimumCubeSet.blue) {
+				minimumCubeSet.blue = element.blue
+			}
+		}
+		const cubeSetPower = minimumCubeSet.red * minimumCubeSet.green * minimumCubeSet.blue;
+		cubeSetPowerSum += cubeSetPower;
+	}
+	console.log("sum", cubeSetPowerSum)
+
+	// console.log("cubeSets", cubeSets)
 	// console.log(`Your answer is ${gameSum}`)
 })
