@@ -32,17 +32,14 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/testInput.txt', (err
 		console.log(`gameSet [${i}]`, gameSets[i]);
 	}
 
-	const gameSetZero = gameSets[0];
-	const gameSetZeroArr = gameSetZero.map(cubeSet => cubeSet);
-
-
-	function mapCubeSetArrToCubeSetType(cubeSetArr: string[]): CubeSet {
+	function mapGameSetElelemtToCubeSetObject(cubeSetArr: string[]): CubeSet {
 
 		let cubeSet: CubeSet = {
 			red: 0,
 			green: 0,
 			blue: 0,
 		};
+
 		cubeSetArr.forEach(cubeCountStr => {
 			const regexMatch = cubeCountStr.matchAll(/\w+/g);
 			const propsToUpdate: string[] = [];
@@ -64,8 +61,14 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/testInput.txt', (err
 		console.log(cubeSet)
 		return cubeSet
 	}
+
+	gameSets.forEach(gameSet => {
+		gameSet.forEach(cubeSetStrArr => {
+			const cubeSet = mapGameSetElelemtToCubeSetObject(cubeSetStrArr)
+			console.log({ cubeSet })
+		})
+	})
 	// console.log(`Your answer is ${answerTry}`)
-	mapCubeSetArrToCubeSetType(['1 red', '40 green'])
 })
 
 
