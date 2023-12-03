@@ -59,8 +59,7 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, da
 	})
 
 	let cubeSetPowerSum = 0;
-	for (const [cubeSetIndex, cubeSet] of cubeSets.entries()) {
-		// console.log(cubeSetIndex, cubeSet)
+	for (const cubeSet of cubeSets) {
 		const minimumCubeSet: CubeSet = {
 			red: 0,
 			green: 0,
@@ -82,8 +81,5 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, da
 		const cubeSetPower = minimumCubeSet.red * minimumCubeSet.green * minimumCubeSet.blue;
 		cubeSetPowerSum += cubeSetPower;
 	}
-	console.log("sum", cubeSetPowerSum)
-
-	// console.log("cubeSets", cubeSets)
-	// console.log(`Your answer is ${gameSum}`)
+	console.log(`Your answer is ${cubeSetPowerSum}`)
 })
