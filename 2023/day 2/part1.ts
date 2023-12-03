@@ -12,7 +12,7 @@ type CubeSet = {
 	blue: number,
 }
 
-fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/testInput.txt', (err, data) => {
+fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, data) => {
 	if (err) throw err;
 	const inputs = data
 		.toString()
@@ -58,17 +58,32 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/testInput.txt', (err
 			}
 
 		})
-		console.log(cubeSet)
 		return cubeSet
 	}
 
-	gameSets.forEach(gameSet => {
-		gameSet.forEach(cubeSetStrArr => {
+	let gameSum = 0;
+
+	const cubeSetsAreValid = gameSets.map(gameSet => {
+		const cubeSetIsValid = gameSet.flatMap(cubeSetStrArr => {
 			const cubeSet = mapGameSetElelemtToCubeSetObject(cubeSetStrArr)
-			console.log({ cubeSet })
-		})
+			if (cubeSet.red <= 12 && cubeSet.green <= 13 && cubeSet.blue <= 14) {
+				return true;
+			} else {
+				return false;
+			}
+		}).reduce((prevEl, currentEl) => prevEl && currentEl)
+
+		return cubeSetIsValid
 	})
-	// console.log(`Your answer is ${answerTry}`)
+
+	console.log("cubeSetsAreValid", cubeSetsAreValid)
+
+	let gamesSum = 0;
+	cubeSetsAreValid.forEach((cubeSetIsValid, cubeSetIndex) => {
+		if (cubeSetIsValid) gameSum += cubeSetIndex + 1;
+	})
+
+	console.log(`Your answer is ${gameSum}`)
 })
 
 
