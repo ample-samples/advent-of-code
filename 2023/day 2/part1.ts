@@ -50,7 +50,6 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, da
 		return cubeSet
 	}
 
-	let gameSum = 0;
 
 	const cubeSetsAreValid = gameSets.map(gameSet => {
 		const cubeSetIsValid = gameSet.flatMap(cubeSetStrArr => {
@@ -65,9 +64,7 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/input.txt', (err, da
 		return cubeSetIsValid
 	})
 
-	console.log("cubeSetsAreValid", cubeSetsAreValid)
-
-	let gamesSum = 0;
+	let gameSum = 0;
 	cubeSetsAreValid.forEach((cubeSetIsValid, cubeSetIndex) => {
 		if (cubeSetIsValid) gameSum += cubeSetIndex + 1;
 	})
