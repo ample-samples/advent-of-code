@@ -65,6 +65,7 @@ fs.readFile('/home/todd/Documents/advent-of-code/2023/day 2/testInput.txt', (err
 		return cubeSet
 	}
 	// console.log(`Your answer is ${answerTry}`)
+	mapCubeSetArrToCubeSetType(['1 red', '40 green'])
 })
 
 
