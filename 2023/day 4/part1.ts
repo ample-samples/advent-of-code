@@ -1,6 +1,6 @@
 import fs from "fs"
 
-fs.readFile('/home/todd/Documents/advent-of-code/2023/day 4/testInput.txt', (err, data) => {
+fs.readFile('/home/todd/Documents/advent-of-code/2023/day 4/input.txt', (err, data) => {
 	if (err) throw err;
 	const inputs = data
 		.toString()
