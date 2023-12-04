@@ -1,5 +1,3 @@
-import fs from 'fs'
-
 // GameSets contain CubeSets
 type CubeSet = {
 	red: number,
